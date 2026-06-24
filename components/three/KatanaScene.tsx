@@ -14,7 +14,7 @@ class KatanaErrorBoundary extends Component<EBProps, EBState> {
     super(props);
     this.state = { hasError: false };
   }
-  static getDerivedStateFromError(_: Error): EBState {
+  static getDerivedStateFromError(): EBState {
     return { hasError: true };
   }
   render(): ReactNode {
@@ -27,10 +27,10 @@ interface KatanaProps {
   mouseRef: React.MutableRefObject<{ x: number; y: number }>;
 }
 
-/* ── Procedural katana — always available, no assets needed ─────── */
-function ProceduralKatana({ mouseRef }: KatanaProps) {
+/* ── KatanaPlaceholder — procedural geometry, no assets needed ───── */
+function KatanaPlaceholder({ mouseRef }: KatanaProps) {
   const groupRef = useRef<THREE.Group>(null);
-  const elapsed = useRef(0);
+  const elapsed  = useRef(0);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -56,19 +56,14 @@ function ProceduralKatana({ mouseRef }: KatanaProps) {
       {/* Blade */}
       <mesh position={[0, 1.85, 0]}>
         <cylinderGeometry args={[0.007, 0.024, 3.7, 6]} />
-        <meshPhysicalMaterial
-          color="#cce0f0"
-          metalness={0.98}
-          roughness={0.02}
-          reflectivity={1}
-        />
+        <meshPhysicalMaterial color="#cce0f0" metalness={0.98} roughness={0.02} reflectivity={1} />
       </mesh>
       {/* Edge highlight */}
       <mesh position={[0.011, 1.85, 0]}>
         <cylinderGeometry args={[0.0018, 0.004, 3.7, 4]} />
         <meshBasicMaterial color="#ffffff" transparent opacity={0.55} />
       </mesh>
-      {/* Tsuba (guard disc) */}
+      {/* Tsuba */}
       <mesh position={[0, 0, 0]}>
         <cylinderGeometry args={[0.11, 0.11, 0.028, 20]} />
         <meshStandardMaterial color="#7a6232" metalness={0.78} roughness={0.22} />
@@ -94,11 +89,11 @@ function ProceduralKatana({ mouseRef }: KatanaProps) {
   );
 }
 
-/* ── GLTF loader — suspends while loading, errors to boundary ───── */
-function GLTFKatana({ mouseRef }: KatanaProps) {
+/* ── KatanaModel — GLTF loader, only rendered when useGltf=true ──── */
+function KatanaModel({ mouseRef }: KatanaProps) {
   const { scene } = useGLTF("/models/katana.glb");
-  const groupRef = useRef<THREE.Group>(null);
-  const elapsed = useRef(0);
+  const groupRef  = useRef<THREE.Group>(null);
+  const elapsed   = useRef(0);
 
   useFrame((_, delta) => {
     if (!groupRef.current) return;
@@ -129,9 +124,11 @@ function GLTFKatana({ mouseRef }: KatanaProps) {
 /* ── Public component ────────────────────────────────────────────── */
 export interface KatanaSceneProps {
   mouseRef: React.MutableRefObject<{ x: number; y: number }>;
+  /** Set to true only when public/models/katana.glb is present */
+  useGltf?: boolean;
 }
 
-export default function KatanaScene({ mouseRef }: KatanaSceneProps) {
+export default function KatanaScene({ mouseRef, useGltf = false }: KatanaSceneProps) {
   return (
     <Canvas
       style={{ background: "transparent", width: "100%", height: "100%" }}
@@ -144,11 +141,15 @@ export default function KatanaScene({ mouseRef }: KatanaSceneProps) {
       <pointLight position={[-4, -2, 3]} intensity={1.2} color="#8b44ed" />
       <pointLight position={[0,  1, 6]}  intensity={0.8} color="#6cb4fc" />
 
-      <KatanaErrorBoundary fallback={<ProceduralKatana mouseRef={mouseRef} />}>
-        <Suspense fallback={<ProceduralKatana mouseRef={mouseRef} />}>
-          <GLTFKatana mouseRef={mouseRef} />
-        </Suspense>
-      </KatanaErrorBoundary>
+      {useGltf ? (
+        <KatanaErrorBoundary fallback={<KatanaPlaceholder mouseRef={mouseRef} />}>
+          <Suspense fallback={<KatanaPlaceholder mouseRef={mouseRef} />}>
+            <KatanaModel mouseRef={mouseRef} />
+          </Suspense>
+        </KatanaErrorBoundary>
+      ) : (
+        <KatanaPlaceholder mouseRef={mouseRef} />
+      )}
     </Canvas>
   );
 }

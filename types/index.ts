@@ -1,5 +1,18 @@
 export type AccentColor = "crimson" | "indigo" | "violet" | "electric" | "blue" | "orange";
 
+export type AssetMode = "abstract" | "image" | "video" | "model";
+
+export interface VisualAssetConfig {
+  mode: AssetMode;
+  videoWebm?: string;
+  videoMp4?: string;
+  poster?: string;
+  image?: string;
+  modelPath?: string;
+  fallbackGradient?: string;
+  overlayOpacity?: number;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -10,6 +23,10 @@ export interface Project {
   accentColor?: AccentColor;
   featured?: boolean;
   href?: string;
+  image?: string;
+  video?: string;
+  poster?: string;
+  modelPath?: string;
 }
 
 export interface SkillGroup {

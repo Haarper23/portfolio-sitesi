@@ -5,7 +5,10 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ArrowDown } from "lucide-react";
 import dynamic from "next/dynamic";
-import CinematicBackground from "@/components/background/CinematicBackground";
+import VisualAssetSlot from "@/components/background/VisualAssetSlot";
+import AtmosphericOverlay from "@/components/background/AtmosphericOverlay";
+import ParallaxLayer from "@/components/background/ParallaxLayer";
+import { heroBackground, katana } from "@/lib/config/assets";
 
 const KatanaSceneDynamic = dynamic(
   () => import("@/components/three/KatanaScene"),
@@ -31,10 +34,11 @@ export default function Hero() {
     { scope: containerRef }
   );
 
-  /* ── Mouse parallax — decorative layer only ────────────────── */
+  /* ── Mouse parallax — skip on touch and reduced-motion devices ── */
   useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches || !monLayerRef.current) return;
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const isTouch       = window.matchMedia("(hover: none)").matches;
+    if (reducedMotion || isTouch || !monLayerRef.current) return;
 
     const layer = monLayerRef.current;
     const xTo = gsap.quickTo(layer, "x", { duration: 1.8, ease: "power3" });
@@ -60,91 +64,17 @@ export default function Hero() {
       className="grain-overlay relative min-h-screen w-full overflow-hidden flex flex-col justify-center"
       style={{ backgroundColor: "#060610" }}
     >
-      {/* ── Layer 1: Cinematic background (video → poster → gradient) ── */}
-      <CinematicBackground
-        videoWebm="/videos/samurai-hero.webm"
-        videoMp4="/videos/samurai-hero.mp4"
-        poster="/images/samurai-hero-poster.webp"
-        overlayOpacity={0.6}
-      />
+      {/* ── Layer 1: Background (driven by heroBackground config) ──── */}
+      <VisualAssetSlot config={heroBackground} />
 
       {/* ── Layer 2: Editorial grid ─────────────────────────────────── */}
       <div className="editorial-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
 
-      {/* ── Layer 3: Animated atmospheric mist ─────────────────────── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="mist-layer absolute"
-          style={{
-            top: "-10%", left: "-5%",
-            width: "60vw", height: "75vh",
-            background: "radial-gradient(ellipse at 30% 30%, rgba(212,32,64,0.18) 0%, transparent 65%)",
-            animation: "mist-drift-a 14s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="mist-layer absolute"
-          style={{
-            bottom: "-15%", right: "-5%",
-            width: "55vw", height: "70vh",
-            background: "radial-gradient(ellipse at 70% 70%, rgba(88,84,240,0.15) 0%, transparent 65%)",
-            animation: "mist-drift-b 18s ease-in-out infinite",
-          }}
-        />
-        <div
-          className="mist-layer absolute"
-          style={{
-            top: "20%", left: "35%",
-            width: "40vw", height: "60vh",
-            background: "radial-gradient(ellipse at 50% 50%, rgba(139,68,237,0.07) 0%, transparent 60%)",
-            animation: "mist-drift-a 22s ease-in-out infinite",
-            animationDelay: "-8s",
-          }}
-        />
-      </div>
+      {/* ── Layer 3: Atmospheric mist ───────────────────────────────── */}
+      <AtmosphericOverlay />
 
-      {/* ── Layer 4: Parallax decorative (mon circles + hairlines) ─── */}
-      <div
-        ref={monLayerRef}
-        className="absolute inset-0 pointer-events-none"
-        aria-hidden="true"
-        style={{ zIndex: 4 }}
-      >
-        {/* Japanese mon */}
-        <svg
-          viewBox="0 0 500 500"
-          className="absolute pointer-events-none"
-          style={{
-            right: "-6vw", top: "50%",
-            transform: "translateY(-50%)",
-            width: "clamp(300px, 40vw, 520px)",
-            height: "auto",
-            opacity: 0.07,
-          }}
-        >
-          <circle cx="250" cy="250" r="238" fill="none" stroke="#f0ead8" strokeWidth="1" />
-          <circle cx="250" cy="250" r="210" fill="none" stroke="#f0ead8" strokeWidth="0.6" />
-          <circle cx="250" cy="250" r="180" fill="none" stroke="#d42040" strokeWidth="0.8" />
-          <circle cx="250" cy="250" r="145" fill="none" stroke="#f0ead8" strokeWidth="0.5" />
-          <circle cx="250" cy="250" r="108" fill="none" stroke="#f0ead8" strokeWidth="0.4" />
-          <circle cx="250" cy="250" r="68"  fill="none" stroke="#d42040" strokeWidth="0.6" />
-          <circle cx="250" cy="250" r="30"  fill="none" stroke="#f0ead8" strokeWidth="0.5" />
-          <line x1="12"  y1="250" x2="488" y2="250" stroke="#f0ead8" strokeWidth="0.4" />
-          <line x1="250" y1="12"  x2="250" y2="488" stroke="#f0ead8" strokeWidth="0.4" />
-          <line x1="82"  y1="82"  x2="418" y2="418" stroke="#f0ead8" strokeWidth="0.25" />
-          <line x1="418" y1="82"  x2="82"  y2="418" stroke="#f0ead8" strokeWidth="0.25" />
-        </svg>
-
-        {/* Diagonal katana hairlines */}
-        <svg
-          className="absolute inset-0 w-full h-full"
-          preserveAspectRatio="none"
-          style={{ opacity: 0.08 }}
-        >
-          <line x1="0"  y1="100%" x2="38%" y2="0" stroke="#f0ead8" strokeWidth="0.5" />
-          <line x1="2%" y1="100%" x2="40%" y2="0" stroke="#f0ead8" strokeWidth="0.25" />
-        </svg>
-      </div>
+      {/* ── Layer 4: Parallax decorative (mon circles + hairlines) ──── */}
+      <ParallaxLayer layerRef={monLayerRef} />
 
       {/* ── Layer 5: KatanaScene (right side, 3D canvas) ────────────── */}
       <div
@@ -152,7 +82,7 @@ export default function Hero() {
         style={{ width: "52vw", zIndex: 5 }}
         aria-hidden="true"
       >
-        <KatanaSceneDynamic mouseRef={mouseRef} />
+        <KatanaSceneDynamic mouseRef={mouseRef} useGltf={katana.enabled} />
       </div>
 
       {/* ── Layer 6: Content ────────────────────────────────────────── */}
