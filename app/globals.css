@@ -1,26 +1,135 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
+  --font-display: var(--font-syne);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* ── Core dark palette — lifted for readability ───────────────── */
+  --color-void:        #060610;
+  --color-dark:        #0f0f1c;
+  --color-charcoal:    #191930;
+  --color-surface:     #22223a;
+  --color-surface-up:  #2c2c50;
+  --color-surface-mid: #1a1a2c;
+
+  /* ── Text / parchment ─────────────────────────────────────────── */
+  --color-canvas:      #f0ead8;
+  --color-parchment:   #f0ead8;
+
+  /* ── Neutral tones ────────────────────────────────────────────── */
+  --color-mist: #8e8890;
+  --color-fog:  #5e5b62;
+  --color-ink:  #0f0f1c;
+
+  /* ── Brand accents ────────────────────────────────────────────── */
+  --color-crimson:     #d42040;
+  --color-crimson-dim: #8c1828;
+  --color-indigo:      #5854f0;
+  --color-violet:      #8b44ed;
+  --color-electric:    #6cb4fc;
+
+  /* ── Legacy / compatibility ───────────────────────────────────── */
+  --color-muted:       #6a6670;
+  --color-inverse:     #f0ead8;
+  --color-border:      #2a2840;
+  --color-border-dark: #1e1c34;
+  --color-dark-surface:#22223a;
+  --color-blue:        #3b82f6;
+  --color-orange:      #f97316;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ── Section helpers ─────────────────────────────────────────────── */
+.section-dark  { background-color: #0f0f1c; color: #f0ead8; }
+.section-void  { background-color: #060610; color: #f0ead8; }
+.section-char  { background-color: #191930; color: #f0ead8; }
+.section-light { background-color: #f0ead8; color: #0f0f1c; }
+
+/* ── Glow utilities ──────────────────────────────────────────────── */
+.glow-crimson  { box-shadow: 0 0 40px 0 rgba(212, 32,  64, 0.32); }
+.glow-indigo   { box-shadow: 0 0 40px 0 rgba( 88, 84, 240, 0.32); }
+.glow-violet   { box-shadow: 0 0 40px 0 rgba(139, 68, 237, 0.28); }
+.glow-electric { box-shadow: 0 0 40px 0 rgba(108,180, 252, 0.28); }
+.glow-blue     { box-shadow: 0 0 40px 0 rgba( 59,130, 246, 0.28); }
+.glow-orange   { box-shadow: 0 0 40px 0 rgba(249,115,  22, 0.24); }
+
+/* ── Film grain (pseudo-element on .grain-overlay) ───────────────── */
+.grain-overlay { position: relative; }
+.grain-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+}
+
+/* ── Editorial grid ──────────────────────────────────────────────── */
+.editorial-grid {
+  background-image:
+    repeating-linear-gradient(0deg,
+      rgba(240,234,216,0.022) 0px, rgba(240,234,216,0.022) 1px,
+      transparent 1px, transparent 80px),
+    repeating-linear-gradient(90deg,
+      rgba(240,234,216,0.022) 0px, rgba(240,234,216,0.022) 1px,
+      transparent 1px, transparent 80px);
+}
+
+/* ── Horizontal scroll track ─────────────────────────────────────── */
+.horizontal-track { display: flex; width: max-content; }
+
+/* ── Typography display class ────────────────────────────────────── */
+.text-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+/* ── Base ────────────────────────────────────────────────────────── */
+html { color-scheme: dark; }
+
+body {
+  background: #0f0f1c;
+  color: #f0ead8;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Mist layer animation — reduced-motion disables ─────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .mist-layer { animation: none !important; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ── Atmospheric keyframes ───────────────────────────────────────── */
+@keyframes mist-drift-a {
+  0%   { transform: translateX(-4%) translateY(2%)  scale(1);    opacity: 0.35; }
+  50%  { transform: translateX(3%)  translateY(-1%) scale(1.05); opacity: 0.55; }
+  100% { transform: translateX(-4%) translateY(2%)  scale(1);    opacity: 0.35; }
+}
+@keyframes mist-drift-b {
+  0%   { transform: translateX(4%)  translateY(-2%) scale(1.02); opacity: 0.28; }
+  50%  { transform: translateX(-3%) translateY(1%)  scale(1);    opacity: 0.45; }
+  100% { transform: translateX(4%)  translateY(-2%) scale(1.02); opacity: 0.28; }
+}
+@keyframes float-gentle {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+@keyframes pulse-glow {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 0.75; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
