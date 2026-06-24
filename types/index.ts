@@ -11,6 +11,10 @@ export interface VisualAssetConfig {
   modelPath?: string;
   fallbackGradient?: string;
   overlayOpacity?: number;
+  /** CSS object-position for image/video mode (e.g. "center 30%") */
+  objectPosition?: string;
+  /** Enable slow scale/drift CSS animation on the image layer */
+  slowMotion?: boolean;
 }
 
 export interface Project {

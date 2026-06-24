@@ -1,14 +1,24 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 export interface CinematicBackgroundProps {
+  /* ── Video mode ──────────────────────────────────────── */
   videoWebm?: string;
   videoMp4?: string;
   poster?: string;
-  /** CSS gradient string used when no video/poster is available */
+
+  /* ── Image mode (Next.js optimised) ─────────────────── */
+  imageSrc?: string;
+  objectPosition?: string;
+  /** Slow scale/drift animation (disabled by prefers-reduced-motion) */
+  slowMotion?: boolean;
+  /** Pass true for above-the-fold images (LCP priority) */
+  priority?: boolean;
+
+  /* ── Common ──────────────────────────────────────────── */
   fallbackGradient?: string;
-  /** Opacity of the dark readability overlay (0–1) */
   overlayOpacity?: number;
   grain?: boolean;
   vignette?: boolean;
@@ -22,6 +32,10 @@ export default function CinematicBackground({
   videoWebm,
   videoMp4,
   poster,
+  imageSrc,
+  objectPosition = "center center",
+  slowMotion = false,
+  priority = false,
   fallbackGradient = "linear-gradient(135deg, #060610 0%, #0f0f22 45%, #140924 100%)",
   overlayOpacity = 0.55,
   grain = true,
@@ -34,8 +48,7 @@ export default function CinematicBackground({
 
   useEffect(() => {
     const check = () => {
-      const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-      setReducedMotion(mq.matches);
+      setReducedMotion(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
     };
     const id = setTimeout(check, 0);
     return () => clearTimeout(id);
@@ -43,25 +56,44 @@ export default function CinematicBackground({
 
   const hasVideoSrc = Boolean(videoWebm || videoMp4);
   const showVideo   = hasVideoSrc && !videoFailed && !reducedMotion;
-  const showPoster  = Boolean(poster) && !showVideo;
+  /* poster is a CSS-bg fallback only when no imageSrc and video is unavailable */
+  const showCssPoster = Boolean(poster) && !imageSrc && !showVideo;
 
   return (
     <div
-      className={`absolute inset-0 overflow-hidden${className ? ` ${className}` : ""}`}
+      className={`absolute inset-0 overflow-hidden pointer-events-none${className ? ` ${className}` : ""}`}
       aria-hidden="true"
     >
-      {/* Base gradient — always renders */}
+      {/* Layer 1 — base gradient, always renders */}
       <div className="absolute inset-0" style={{ background: fallbackGradient }} />
 
-      {/* Poster image fallback */}
-      {showPoster && (
+      {/* Layer 2 — Next.js optimised image (image mode) */}
+      {imageSrc && (
+        <div
+          className={`absolute inset-0${slowMotion && !reducedMotion ? " bg-drift" : ""}`}
+        >
+          <Image
+            src={imageSrc}
+            alt=""
+            fill
+            priority={priority}
+            quality={80}
+            sizes="100vw"
+            className="object-cover"
+            style={{ objectPosition }}
+          />
+        </div>
+      )}
+
+      {/* Layer 3 — CSS background poster (legacy / video fallback) */}
+      {showCssPoster && (
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${poster})`, opacity: 0.5 }}
         />
       )}
 
-      {/* Video — autoplay, muted, loop */}
+      {/* Layer 4 — video */}
       {showVideo && (
         <video
           ref={videoRef}
@@ -79,13 +111,13 @@ export default function CinematicBackground({
         </video>
       )}
 
-      {/* Dark readability overlay */}
+      {/* Layer 5 — dark readability overlay */}
       <div
         className="absolute inset-0"
         style={{ backgroundColor: `rgba(6,6,16,${overlayOpacity})` }}
       />
 
-      {/* Radial vignette */}
+      {/* Layer 6 — radial vignette */}
       {vignette && (
         <div
           className="absolute inset-0"
@@ -96,7 +128,7 @@ export default function CinematicBackground({
         />
       )}
 
-      {/* Film grain */}
+      {/* Layer 7 — film grain */}
       {grain && (
         <div
           className="absolute inset-0"

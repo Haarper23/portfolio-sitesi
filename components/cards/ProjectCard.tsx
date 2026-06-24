@@ -21,6 +21,15 @@ const glowMap: Record<AccentColor, string> = {
   orange:   "hover:glow-orange hover:border-orange/30",
 };
 
+const headerBg: Record<AccentColor, string> = {
+  crimson:  "linear-gradient(180deg, rgba(212,32,64,0.20) 0%, transparent 100%)",
+  indigo:   "linear-gradient(180deg, rgba(88,84,240,0.20) 0%, transparent 100%)",
+  violet:   "linear-gradient(180deg, rgba(139,68,237,0.20) 0%, transparent 100%)",
+  electric: "linear-gradient(180deg, rgba(108,180,252,0.18) 0%, transparent 100%)",
+  blue:     "linear-gradient(180deg, rgba(59,130,246,0.18) 0%, transparent 100%)",
+  orange:   "linear-gradient(180deg, rgba(249,115,22,0.20) 0%, transparent 100%)",
+};
+
 const accentLine: Record<AccentColor, string> = {
   crimson:  "bg-gradient-to-r from-transparent via-crimson to-transparent",
   indigo:   "bg-gradient-to-r from-transparent via-indigo to-transparent",
@@ -62,9 +71,18 @@ export default function ProjectCard({ project }: { project: Project }) {
       {/* Accent top line */}
       <div
         className={cn(
-          "absolute top-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-300",
+          "absolute top-0 left-0 right-0 h-px opacity-35 group-hover:opacity-100 transition-opacity duration-300",
           accentLine[accent]
         )}
+      />
+
+      {/* Ambient color header glow */}
+      <div
+        className="absolute top-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: size === "large" ? "160px" : "100px",
+          background: headerBg[accent],
+        }}
       />
 
       <div>
@@ -101,7 +119,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             size === "large" ? "text-base max-w-md" : "text-sm",
             size === "small" && "line-clamp-2"
           )}
-          style={{ color: "rgba(245,240,232,0.42)" }}
+          style={{ color: "rgba(245,240,232,0.58)" }}
         >
           {project.description}
         </p>
@@ -114,9 +132,9 @@ export default function ProjectCard({ project }: { project: Project }) {
             key={tag}
             className="px-2 py-0.5 rounded-md text-xs font-mono border"
             style={{
-              color: "rgba(245,240,232,0.35)",
-              borderColor: "rgba(245,240,232,0.07)",
-              backgroundColor: "rgba(245,240,232,0.025)",
+              color: "rgba(245,240,232,0.52)",
+              borderColor: "rgba(245,240,232,0.12)",
+              backgroundColor: "rgba(245,240,232,0.04)",
             }}
           >
             {tag}

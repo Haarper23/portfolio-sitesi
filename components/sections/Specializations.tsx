@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { gameBackground } from "@/lib/config/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -137,6 +139,13 @@ function WaveformVisual() {
   );
 }
 
+const SPEC_CARD_BG: Record<string, string> = {
+  game:      "transparent",
+  app:       "linear-gradient(135deg, #0d0a1f 0%, #1a1042 60%, #110c2c 100%)",
+  fullstack: "linear-gradient(160deg, #060d22 0%, #0e1c3e 60%, #081428 100%)",
+  ai:        "linear-gradient(155deg, #0a0618 0%, #180a36 50%, #0e0520 100%)",
+};
+
 const SPECS: Spec[] = [
   {
     id: "game",
@@ -245,12 +254,57 @@ export default function Specializations() {
                 className="relative h-44 overflow-hidden"
                 style={{ borderBottom: "1px solid rgba(245,240,232,0.06)" }}
               >
+                {/* Non-game cards: deep tinted base */}
+                {spec.id !== "game" && (
+                  <div
+                    className="absolute inset-0"
+                    style={{ background: SPEC_CARD_BG[spec.id] }}
+                  />
+                )}
+
+                {/* Game card only: real background image */}
+                {spec.id === "game" &&
+                  gameBackground.mode === "image" &&
+                  gameBackground.image && (
+                    <>
+                      <div className="absolute inset-0">
+                        <Image
+                          src={gameBackground.image}
+                          alt=""
+                          fill
+                          sizes="(max-width: 640px) 100vw, 50vw"
+                          quality={75}
+                          className="object-cover"
+                          style={{ objectPosition: gameBackground.objectPosition ?? "center" }}
+                        />
+                      </div>
+                      <div
+                        className="absolute inset-0"
+                        style={{ backgroundColor: `rgba(6,6,16,${gameBackground.overlayOpacity ?? 0.6})` }}
+                      />
+                    </>
+                  )}
+
+                {/* Radial accent glow — stronger for non-game cards */}
                 <div
-                  className="absolute inset-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+                  className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-100"
                   style={{
-                    background: `radial-gradient(ellipse at 50% 50%, rgba(${spec.accentRgb},0.08) 0%, transparent 70%)`,
+                    background: `radial-gradient(ellipse at 50% 40%, rgba(${spec.accentRgb},${spec.id === "game" ? 0.10 : 0.32}) 0%, transparent 65%)`,
+                    opacity: spec.id === "game" ? 0.7 : 0.9,
                   }}
                 />
+
+                {/* Bottom fade for depth (non-game only) */}
+                {spec.id !== "game" && (
+                  <div
+                    className="absolute bottom-0 left-0 right-0 pointer-events-none"
+                    style={{
+                      height: "45%",
+                      background: `linear-gradient(0deg, rgba(${spec.accentRgb},0.08) 0%, transparent 100%)`,
+                    }}
+                  />
+                )}
+
                 <div className="absolute inset-0 p-4">
                   {spec.visual}
                 </div>

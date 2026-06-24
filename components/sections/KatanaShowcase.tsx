@@ -4,6 +4,8 @@ import { useRef, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import VisualAssetSlot from "@/components/background/VisualAssetSlot";
+import { katanaShowcaseBackground } from "@/lib/config/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -114,7 +116,10 @@ export default function KatanaShowcase() {
       className="grain-overlay py-32 md:py-44 overflow-hidden"
       style={{ backgroundColor: "#070512" }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
+      {/* Atmospheric background image — pointer-events: none via CinematicBackground */}
+      <VisualAssetSlot config={katanaShowcaseBackground} />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20" style={{ position: "relative" }}>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-0 items-center">
 
           {/* ── Text ─────────────────────────────────────────────── */}

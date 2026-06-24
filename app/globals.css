@@ -90,7 +90,11 @@
 }
 
 /* ── Base ────────────────────────────────────────────────────────── */
-html { color-scheme: dark; }
+html {
+  color-scheme: dark;
+  background: #060610;
+  overflow-x: clip;
+}
 
 body {
   background: #0f0f1c;
@@ -98,6 +102,7 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
 }
 
 /* ── Mist layer animation — reduced-motion disables ─────────────── */
@@ -132,4 +137,16 @@ body {
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
+}
+
+/* ── Background image drift (Hero + cinematic sections) ─────────── */
+@keyframes bg-drift {
+  0%   { transform: scale(1.03) translate(   0,    0); }
+  33%  { transform: scale(1.06) translate(-0.6%, -1.2%); }
+  66%  { transform: scale(1.05) translate( 0.4%, -0.7%); }
+  100% { transform: scale(1.04) translate(-0.3%, -0.5%); }
+}
+.bg-drift {
+  animation: bg-drift 20s ease-in-out infinite alternate;
+  will-change: transform;
 }

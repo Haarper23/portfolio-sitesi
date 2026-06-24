@@ -5,6 +5,8 @@ import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Code2, BriefcaseBusiness, Mail, ArrowUpRight, Copy, Check } from "lucide-react";
+import VisualAssetSlot from "@/components/background/VisualAssetSlot";
+import { contactBackground } from "@/lib/config/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,10 +32,11 @@ export default function Contact() {
         scrollTrigger: { trigger: sectionRef.current, start: "top 80%", once: true },
       });
       gsap.from(".email-mask", {
-        y: "105%",
-        duration: 1.1,
-        ease: "power4.out",
-        scrollTrigger: { trigger: ".email-wrapper", start: "top 82%", once: true },
+        opacity: 0,
+        y: 28,
+        duration: 1.0,
+        ease: "power3.out",
+        scrollTrigger: { trigger: ".email-wrapper", start: "top 85%", once: true },
       });
     },
     { scope: sectionRef }
@@ -53,10 +56,13 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="grain-overlay py-32 md:py-44"
+      className="grain-overlay relative py-32 md:py-44 overflow-hidden"
       style={{ backgroundColor: "#141420" }}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
+      {/* Background image layer (project-bg-3.png) */}
+      <VisualAssetSlot config={contactBackground} />
+
+      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20" style={{ position: "relative" }}>
         <div className="max-w-4xl">
 
           {/* Label */}
@@ -104,18 +110,17 @@ export default function Contact() {
             opportunities — across Europe, North America, and beyond.
           </p>
 
-          {/* Email block */}
-          <div className="email-wrapper overflow-hidden mb-4">
+          {/* Email — block display, no overflow clip, nowrap keeps it on one line */}
+          <div className="email-wrapper mb-4">
             <a
               href={`mailto:${EMAIL}`}
               aria-label={`Send email to ${EMAIL}`}
               className="email-mask block font-display text-parchment hover:text-crimson transition-colors duration-300"
               style={{
-                fontSize: "clamp(1.4rem, 3.5vw, 3rem)",
+                fontSize: "clamp(1.2rem, 4vw, 3rem)",
                 fontWeight: 800,
                 letterSpacing: "-0.02em",
-                wordBreak: "break-all",
-                overflowWrap: "anywhere",
+                whiteSpace: "nowrap",
               }}
             >
               {EMAIL}

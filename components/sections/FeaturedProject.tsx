@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import VisualAssetSlot from "@/components/background/VisualAssetSlot";
+import { aiBackground } from "@/lib/config/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -38,6 +40,19 @@ export default function FeaturedProject() {
       className="grain-overlay relative py-32 md:py-44 overflow-hidden"
       style={{ backgroundColor: "#0f0f1c" }}
     >
+      {/* Background image layer */}
+      <VisualAssetSlot config={aiBackground} />
+
+      {/* Left-side text readability gradient */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(100deg, rgba(15,15,28,0.55) 0%, rgba(15,15,28,0.22) 50%, transparent 100%)",
+        }}
+      />
+
       {/* Electric glow accent */}
       <div
         aria-hidden="true"
@@ -49,7 +64,7 @@ export default function FeaturedProject() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
         <p className="fp-reveal font-mono text-xs tracking-[0.2em] uppercase text-electric mb-14">
           003 / Featured Project
         </p>

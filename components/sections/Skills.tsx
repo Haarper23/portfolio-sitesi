@@ -10,12 +10,12 @@ import type { AccentColor } from "@/types";
 gsap.registerPlugin(ScrollTrigger);
 
 const accentTag: Record<AccentColor, string> = {
-  crimson:  "border-crimson/20 text-crimson/80 hover:border-crimson/45 hover:bg-crimson/6",
-  indigo:   "border-indigo/20 text-indigo/80 hover:border-indigo/45 hover:bg-indigo/6",
-  violet:   "border-violet/20 text-violet/80 hover:border-violet/45 hover:bg-violet/6",
-  electric: "border-electric/20 text-electric/80 hover:border-electric/45 hover:bg-electric/6",
-  blue:     "border-blue/20 text-blue/80 hover:border-blue/45 hover:bg-blue/6",
-  orange:   "border-orange/20 text-orange/80 hover:border-orange/45 hover:bg-orange/6",
+  crimson:  "border-crimson/35 text-crimson bg-crimson/5 hover:border-crimson/60 hover:bg-crimson/12",
+  indigo:   "border-indigo/35 text-indigo bg-indigo/5 hover:border-indigo/60 hover:bg-indigo/12",
+  violet:   "border-violet/35 text-violet bg-violet/5 hover:border-violet/60 hover:bg-violet/12",
+  electric: "border-electric/30 text-electric bg-electric/4 hover:border-electric/55 hover:bg-electric/10",
+  blue:     "border-blue/30 text-blue bg-blue/4 hover:border-blue/55 hover:bg-blue/10",
+  orange:   "border-orange/30 text-orange bg-orange/4 hover:border-orange/55 hover:bg-orange/10",
 };
 
 const accentDot: Record<AccentColor, string> = {
@@ -101,7 +101,7 @@ export default function Skills() {
                 <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${accentDot[group.accentColor]}`} />
                 <span
                   className="text-xs font-mono uppercase tracking-widest"
-                  style={{ color: "rgba(245,240,232,0.38)" }}
+                  style={{ color: "rgba(245,240,232,0.65)" }}
                 >
                   {group.domain}
                 </span>
@@ -113,7 +113,6 @@ export default function Skills() {
                   <span
                     key={skill}
                     className={`skill-tag px-3 py-1.5 rounded-xl text-sm font-medium border transition-all duration-200 cursor-default ${accentTag[group.accentColor]}`}
-                    style={{ backgroundColor: "rgba(245,240,232,0.02)" }}
                   >
                     {skill}
                   </span>

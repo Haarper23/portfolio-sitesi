@@ -65,7 +65,18 @@ export default function Hero() {
       style={{ backgroundColor: "#060610" }}
     >
       {/* ── Layer 1: Cinematic background (driven by asset config) ── */}
-      <VisualAssetSlot config={heroBackground} />
+      <VisualAssetSlot config={heroBackground} priority />
+
+      {/* ── Layer 1b: Text-side gradient (strengthens headline contrast) */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        aria-hidden="true"
+        style={{
+          background:
+            "linear-gradient(105deg, rgba(6,6,16,0.55) 0%, rgba(6,6,16,0.28) 45%, rgba(6,6,16,0.05) 72%, transparent 100%)",
+          zIndex: 1,
+        }}
+      />
 
       {/* ── Layer 2: Editorial grid ─────────────────────────────── */}
       <div className="editorial-grid absolute inset-0 pointer-events-none" aria-hidden="true" />

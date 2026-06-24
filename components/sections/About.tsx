@@ -4,6 +4,8 @@ import { useRef } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import VisualAssetSlot from "@/components/background/VisualAssetSlot";
+import { aboutBackground } from "@/lib/config/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -34,6 +36,19 @@ export default function About() {
       className="grain-overlay relative py-32 md:py-44 overflow-hidden"
       style={{ backgroundColor: "#0c0c12" }}
     >
+      {/* Background image layer (hero-bg-2.png) */}
+      <VisualAssetSlot config={aboutBackground} />
+
+      {/* Right-side gradient — keeps Quick Profile card legible */}
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(270deg, rgba(8,8,18,0.72) 0%, rgba(8,8,18,0.28) 52%, transparent 100%)",
+        }}
+      />
+
       {/* Subtle indigo glow */}
       <div
         aria-hidden="true"
@@ -44,7 +59,7 @@ export default function About() {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
+      <div className="relative max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
           {/* Left — text */}
@@ -101,6 +116,33 @@ export default function About() {
                 >
                   {label}
                 </span>
+              ))}
+            </div>
+
+            {/* Stats strip */}
+            <div
+              className="about-reveal grid grid-cols-3 gap-6 mt-10 pt-8 border-t"
+              style={{ borderColor: "rgba(245,240,232,0.06)" }}
+            >
+              {[
+                { value: "3+",  label: "Years coding"      },
+                { value: "10+", label: "Projects built"    },
+                { value: "4",   label: "Core disciplines"  },
+              ].map(({ value, label }) => (
+                <div key={label}>
+                  <div
+                    className="font-display text-parchment font-bold"
+                    style={{ fontSize: "2rem", letterSpacing: "-0.03em", lineHeight: 1 }}
+                  >
+                    {value}
+                  </div>
+                  <div
+                    className="font-mono text-[10px] tracking-[0.15em] uppercase mt-1.5"
+                    style={{ color: "rgba(245,240,232,0.32)" }}
+                  >
+                    {label}
+                  </div>
+                </div>
               ))}
             </div>
           </div>
