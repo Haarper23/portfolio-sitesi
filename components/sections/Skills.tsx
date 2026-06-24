@@ -77,7 +77,7 @@ export default function Skills() {
         {/* Header */}
         <div className="skills-header mb-16">
           <p className="font-mono text-xs tracking-[0.2em] uppercase text-crimson mb-5">
-            006 / Skills
+            008 / Skills
           </p>
           <h2
             className="font-display text-parchment"

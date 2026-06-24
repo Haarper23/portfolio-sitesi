@@ -64,19 +64,19 @@ export default function Hero() {
       className="grain-overlay relative min-h-screen w-full overflow-hidden flex flex-col justify-center"
       style={{ backgroundColor: "#060610" }}
     >
-      {/* ── Layer 1: Background (driven by heroBackground config) ──── */}
+      {/* ── Layer 1: Cinematic background (driven by asset config) ── */}
       <VisualAssetSlot config={heroBackground} />
 
-      {/* ── Layer 2: Editorial grid ─────────────────────────────────── */}
+      {/* ── Layer 2: Editorial grid ─────────────────────────────── */}
       <div className="editorial-grid absolute inset-0 pointer-events-none" aria-hidden="true" />
 
-      {/* ── Layer 3: Atmospheric mist ───────────────────────────────── */}
+      {/* ── Layer 3: Atmospheric mist ───────────────────────────── */}
       <AtmosphericOverlay />
 
-      {/* ── Layer 4: Parallax decorative (mon circles + hairlines) ──── */}
+      {/* ── Layer 4: Parallax decorative (mon circles + hairlines) */}
       <ParallaxLayer layerRef={monLayerRef} />
 
-      {/* ── Layer 5: KatanaScene (right side, 3D canvas) ────────────── */}
+      {/* ── Layer 5: KatanaScene (right side, 3D canvas) ────────── */}
       <div
         className="absolute top-0 bottom-0 right-0 pointer-events-none hidden md:block"
         style={{ width: "52vw", zIndex: 5 }}
@@ -85,7 +85,7 @@ export default function Hero() {
         <KatanaSceneDynamic mouseRef={mouseRef} useGltf={katana.enabled} />
       </div>
 
-      {/* ── Layer 6: Content ────────────────────────────────────────── */}
+      {/* ── Layer 6: Content ────────────────────────────────────── */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 xl:px-20 pt-40 pb-32">
 
         {/* Overline */}
@@ -137,8 +137,10 @@ export default function Hero() {
           className="hero-copy mb-10 max-w-xl leading-relaxed"
           style={{ color: "rgba(240,234,216,0.72)", fontSize: "1.05rem" }}
         >
-          I design and build across the full spectrum — from gameplay systems and
-          procedural worlds to full-stack platforms and intelligent AI tools.
+          I&apos;m a Computer Engineer building atmospheric game systems,
+          practical applications, and intelligent software. My work spans Unity
+          and Unreal Engine development, mobile and desktop applications,
+          full-stack systems, and AI-driven tools.
         </p>
 
         {/* Status row */}
@@ -165,10 +167,10 @@ export default function Hero() {
         </div>
 
         {/* CTAs */}
-        <div className="hero-cta flex flex-wrap gap-4">
+        <div className="hero-cta flex flex-wrap gap-3">
           <a
             href="#projects"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300 hover:scale-[1.03] hover:brightness-110"
             style={{
               backgroundColor: "#d42040",
               color: "#f0ead8",
@@ -178,11 +180,36 @@ export default function Hero() {
             Explore My Work
           </a>
           <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-sm font-semibold transition-all duration-300"
+            href="https://github.com/berkeedeveci"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300"
             style={{
-              color: "rgba(240,234,216,0.72)",
-              border: "1px solid rgba(240,234,216,0.15)",
+              color: "rgba(240,234,216,0.78)",
+              border: "1px solid rgba(240,234,216,0.18)",
+              backgroundColor: "rgba(240,234,216,0.04)",
+            }}
+          >
+            View GitHub
+          </a>
+          <a
+            href="/Berke-Emre-Deveci-CV.pdf"
+            download
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300"
+            style={{
+              color: "rgba(240,234,216,0.78)",
+              border: "1px solid rgba(240,234,216,0.18)",
+              backgroundColor: "rgba(240,234,216,0.04)",
+            }}
+          >
+            Download Resume
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300"
+            style={{
+              color: "rgba(240,234,216,0.55)",
+              border: "1px solid rgba(240,234,216,0.1)",
             }}
           >
             Contact Me

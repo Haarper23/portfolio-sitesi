@@ -1,22 +1,23 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Code2, BriefcaseBusiness, Mail, ArrowUpRight } from "lucide-react";
+import { Code2, BriefcaseBusiness, Mail, ArrowUpRight, Copy, Check } from "lucide-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const EMAIL = "emrebkrdvc@gmail.com";
 const SOCIAL = [
-  { label: "GitHub",   href: "https://github.com/berkeedeveci",   icon: Code2 },
+  { label: "GitHub",   href: "https://github.com/berkeedeveci",      icon: Code2 },
   { label: "LinkedIn", href: "https://linkedin.com/in/berkeedeveci", icon: BriefcaseBusiness },
-  { label: "Email",    href: `mailto:${EMAIL}`,                   icon: Mail },
+  { label: "Email",    href: `mailto:${EMAIL}`,                      icon: Mail },
 ];
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
+  const [copied, setCopied]   = useState(false);
 
   useGSAP(
     () => {
@@ -38,6 +39,16 @@ export default function Contact() {
     { scope: sectionRef }
   );
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2200);
+    } catch {
+      /* clipboard unavailable — silent */
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -51,7 +62,7 @@ export default function Contact() {
           {/* Label */}
           <div className="contact-reveal flex items-center gap-4 mb-8">
             <p className="font-mono text-xs tracking-[0.2em] uppercase text-crimson">
-              008 / Contact
+              010 / Contact
             </p>
             <span
               className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full border"
@@ -69,27 +80,64 @@ export default function Contact() {
             </span>
           </div>
 
+          {/* Heading */}
+          <h2
+            className="contact-reveal font-display text-parchment mb-6"
+            style={{
+              fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
+              fontWeight: 800,
+              letterSpacing: "-0.03em",
+              lineHeight: 1.0,
+            }}
+          >
+            Let&apos;s build something
+            <br />
+            <span style={{ color: "rgba(245,240,232,0.3)" }}>worth remembering.</span>
+          </h2>
+
           {/* Sub-headline */}
           <p
-            className="contact-reveal text-lg md:text-xl leading-relaxed max-w-lg mb-12"
+            className="contact-reveal text-base md:text-lg leading-relaxed max-w-lg mb-12"
             style={{ color: "rgba(245,240,232,0.48)" }}
           >
-            Open to full-time roles, remote contracts, and interesting collaborations — internationally.
+            Open to full-time roles, remote contracts, and international
+            opportunities — across Europe, North America, and beyond.
           </p>
 
-          {/* Large email — masked reveal */}
-          <div className="email-wrapper overflow-hidden mb-12">
+          {/* Email block */}
+          <div className="email-wrapper overflow-hidden mb-4">
             <a
               href={`mailto:${EMAIL}`}
-              className="email-mask block font-display text-parchment tracking-tight leading-none hover:text-crimson transition-colors duration-300"
+              aria-label={`Send email to ${EMAIL}`}
+              className="email-mask block font-display text-parchment hover:text-crimson transition-colors duration-300"
               style={{
-                fontSize: "clamp(1.6rem, 4.5vw, 4.2rem)",
+                fontSize: "clamp(1.4rem, 3.5vw, 3rem)",
                 fontWeight: 800,
                 letterSpacing: "-0.02em",
+                wordBreak: "break-all",
+                overflowWrap: "anywhere",
               }}
             >
               {EMAIL}
             </a>
+          </div>
+
+          {/* Copy button */}
+          <div className="contact-reveal mb-12">
+            <button
+              onClick={handleCopy}
+              aria-label={copied ? "Email address copied to clipboard" : "Copy email address"}
+              aria-live="polite"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-mono transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson/50"
+              style={{
+                color: copied ? "rgba(96,165,250,0.9)" : "rgba(245,240,232,0.42)",
+                border: `1px solid ${copied ? "rgba(96,165,250,0.35)" : "rgba(245,240,232,0.1)"}`,
+                backgroundColor: copied ? "rgba(96,165,250,0.06)" : "rgba(245,240,232,0.02)",
+              }}
+            >
+              {copied ? <Check size={12} /> : <Copy size={12} />}
+              {copied ? "Copied to clipboard" : "Copy email"}
+            </button>
           </div>
 
           {/* Divider */}
@@ -106,7 +154,7 @@ export default function Contact() {
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
-                className="contact-reveal inline-flex items-center gap-2.5 px-5 py-3 rounded-full text-sm font-medium transition-all duration-200 group"
+                className="contact-reveal inline-flex items-center gap-2.5 px-5 py-3 rounded-full text-sm font-medium transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson/50"
                 style={{
                   color: "rgba(245,240,232,0.6)",
                   border: "1px solid rgba(245,240,232,0.1)",

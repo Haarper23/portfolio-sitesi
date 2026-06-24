@@ -5,8 +5,8 @@ export const projects: Project[] = [
     id: "cyber-roguelike",
     title: "Cyber Roguelike Action Game",
     description:
-      "A fully playable roguelike featuring procedurally generated dungeons, reactive enemy AI, and a fluid combat system — built from scratch in Unity.",
-    tags: ["Unity", "C#", "Procedural Generation", "Enemy AI", "Game Design", "Gameplay Systems"],
+      "A dark, combat-focused roguelite featuring procedural encounters, enemy AI, progression systems, atmospheric environments, and responsive gameplay systems built in Unity.",
+    tags: ["Unity", "C#", "Procedural Generation", "Enemy AI", "Combat Systems", "Roguelite Progression", "Gameplay Systems"],
     category: "game",
     size: "large",
     accentColor: "crimson",
@@ -16,8 +16,8 @@ export const projects: Project[] = [
     id: "unreal-prototype",
     title: "Unreal Engine Gameplay Prototype",
     description:
-      "First-person gameplay prototype exploring environmental storytelling and movement mechanics inside Unreal Engine — implemented in Blueprints and C++.",
-    tags: ["Unreal Engine", "C++", "Blueprints", "Gameplay Mechanics", "3D Environments"],
+      "A gameplay-focused Unreal Engine prototype exploring environment interaction, character systems, AI behavior, movement mechanics, and scalable Blueprint and C++ architecture.",
+    tags: ["Unreal Engine", "C++", "Blueprints", "Gameplay Systems", "Environment Interaction", "AI Behavior"],
     category: "game",
     size: "medium",
     accentColor: "violet",
@@ -27,8 +27,8 @@ export const projects: Project[] = [
     id: "ai-media-assistant",
     title: "Context-Aware Media Assistant",
     description:
-      "Desktop AI assistant that reads real-time behavioral context — active apps, focus state, time of day — and delivers adaptive music and film recommendations via voice.",
-    tags: ["Python", "Machine Learning", "Voice Recognition", "Context Awareness", "Desktop"],
+      "An intelligent desktop assistant that analyzes real-time user activity, active applications, focus state, and behavioral context to deliver adaptive music and film recommendations through natural voice commands.",
+    tags: ["Python", "Machine Learning", "Recommendation Systems", "Voice Recognition", "Context Awareness", "Desktop Application", "Real-Time Processing"],
     category: "ai",
     size: "medium",
     accentColor: "electric",
@@ -38,31 +38,34 @@ export const projects: Project[] = [
     id: "community-hub",
     title: "Community Hub Mobile App",
     description:
-      "Android community app with user-focused flows — post discovery, group interaction, and profile management — backed by REST API integration and local SQLite storage.",
-    tags: ["Java", "Android", "REST API", "SQLite", "Mobile UI"],
+      "A mobile community platform designed for clear, accessible interaction with shared content and community-oriented features — built on structured Android flows, API integration, and maintainable mobile architecture.",
+    tags: ["Java", "Android", "Mobile Application", "API Integration", "UI Architecture", "Local Data", "Authentication"],
     category: "app",
     size: "small",
     accentColor: "indigo",
+    featured: true,
   },
   {
     id: "spring-boot-system",
     title: "Spring Boot Backend System",
     description:
-      "Layered REST API backend in Java and Spring Boot — clean separation of concerns, SQL data persistence, and conventional endpoint design.",
-    tags: ["Java", "Spring Boot", "REST API", "SQL", "Backend Architecture"],
+      "A layered Java backend built with Spring Boot — modular services, RESTful endpoints, request validation, exception handling, and persistent data management through controller-service-repository separation.",
+    tags: ["Java", "Spring Boot", "REST API", "SQL", "Backend Development", "Database Integration", "Layered Architecture"],
     category: "fullstack",
     size: "small",
     accentColor: "orange",
+    featured: true,
   },
   {
     id: "desktop-app",
     title: "Desktop Application",
     description:
-      "Cross-platform desktop app with a native-feeling UI — local data management, system tray integration, and persistent user configuration.",
+      "A cross-platform desktop application with a native-feeling interface — local data management, persistent user configuration, system integration, and structured application architecture in C# and .NET.",
     tags: ["C#", ".NET", "Desktop UI", "Local Storage", "System Integration"],
     category: "app",
     size: "small",
     accentColor: "blue",
+    featured: true,
   },
 ];
 

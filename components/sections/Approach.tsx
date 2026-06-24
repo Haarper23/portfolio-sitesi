@@ -66,7 +66,7 @@ export default function Approach() {
         {/* Header */}
         <div className="mb-16 md:mb-20">
           <p className="approach-reveal font-mono text-xs tracking-[0.2em] uppercase text-crimson mb-5">
-            007 / Development Approach
+            009 / Development Approach
           </p>
           <h2
             className="approach-reveal font-display text-parchment max-w-xl"

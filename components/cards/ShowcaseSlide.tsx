@@ -44,8 +44,8 @@ export default function ShowcaseSlide({
   return (
     <article
       className={cn(
-        "relative flex-shrink-0 w-[90vw] lg:w-[55vw] xl:w-[45vw] h-full",
-        "flex flex-col justify-between p-10 lg:p-14",
+        "relative flex-shrink-0 w-[90vw] lg:w-[52vw] xl:w-[42vw] h-full",
+        "flex flex-col justify-between p-8 lg:p-12",
         "bg-gradient-to-br",
         accentGradient[accent]
       )}
@@ -54,8 +54,8 @@ export default function ShowcaseSlide({
       {/* Number + category */}
       <div className="flex items-center justify-between">
         <span
-          className="font-mono text-5xl font-bold select-none"
-          style={{ color: "rgba(245,240,232,0.1)" }}
+          className="font-mono text-4xl font-bold select-none"
+          style={{ color: "rgba(245,240,232,0.08)" }}
         >
           {num}
         </span>
@@ -67,9 +67,9 @@ export default function ShowcaseSlide({
       {/* Content */}
       <div>
         <h3
-          className="font-display text-parchment tracking-tight leading-tight mb-6"
+          className="font-display text-parchment tracking-tight leading-tight mb-5"
           style={{
-            fontSize: "clamp(2rem, 5vw, 3.8rem)",
+            fontSize: "clamp(1.5rem, 3vw, 2.8rem)",
             fontWeight: 800,
             letterSpacing: "-0.03em",
           }}
@@ -77,15 +77,15 @@ export default function ShowcaseSlide({
           {project.title}
         </h3>
         <p
-          className="text-lg leading-relaxed max-w-md mb-8"
-          style={{ color: "rgba(245,240,232,0.42)" }}
+          className="leading-relaxed max-w-md mb-7"
+          style={{ color: "rgba(245,240,232,0.45)", fontSize: "0.95rem" }}
         >
           {project.description}
         </p>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {project.tags.map((tag) => (
+        <div className="flex flex-wrap gap-2 mb-7">
+          {project.tags.slice(0, 5).map((tag) => (
             <span
               key={tag}
               className="px-3 py-1 rounded-full text-xs font-mono border"
@@ -122,7 +122,7 @@ export default function ShowcaseSlide({
         className="absolute bottom-0 right-0 w-48 h-48 rounded-full pointer-events-none"
         style={{
           background: `radial-gradient(circle, ${glowColor[accent]} 0%, transparent 70%)`,
-          opacity: 0.12,
+          opacity: 0.1,
         }}
       />
     </article>
