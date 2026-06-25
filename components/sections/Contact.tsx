@@ -4,22 +4,77 @@ import { useRef, useState } from "react";
 import { useGSAP } from "@gsap/react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Code2, BriefcaseBusiness, Mail, ArrowUpRight, Copy, Check } from "lucide-react";
+import { Code2, Mail, ArrowUpRight, Copy, Check } from "lucide-react";
 import VisualAssetSlot from "@/components/background/VisualAssetSlot";
 import { contactBackground } from "@/lib/config/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const EMAIL = "emrebkrdvc@gmail.com";
-const SOCIAL = [
-  { label: "GitHub",   href: "https://github.com/berkeedeveci",      icon: Code2 },
-  { label: "LinkedIn", href: "https://linkedin.com/in/berkeedeveci", icon: BriefcaseBusiness },
-  { label: "Email",    href: `mailto:${EMAIL}`,                      icon: Mail },
-];
+
+// lucide-react 1.21 does not include brand icons — inline SVG used instead
+const InstagramIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const LinkedInIcon = ({ size = 20 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.75"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const SOCIAL_PILLS = [
+  { label: "GitHub", href: "https://github.com/berkeedeveci", icon: Code2 },
+  { label: "Email",  href: `mailto:${EMAIL}`,                icon: Mail },
+] as const;
+
+const SOCIAL_ICONS = [
+  {
+    label: "Instagram",
+    href:  "https://www.instagram.com/haarper23/",
+    Icon:  InstagramIcon,
+    hoverColor: "rgba(212,32,64,0.18)",
+    hoverBorder: "rgba(212,32,64,0.55)",
+  },
+  {
+    label: "LinkedIn",
+    href:  "https://www.linkedin.com/in/berke-emre-deveci-18575a299/",
+    Icon:  LinkedInIcon,
+    hoverColor: "rgba(88,84,240,0.18)",
+    hoverBorder: "rgba(88,84,240,0.55)",
+  },
+] as const;
 
 export default function Contact() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [copied, setCopied]   = useState(false);
+  const [copied, setCopied] = useState(false);
+  const [hovered, setHovered] = useState<string | null>(null);
 
   useGSAP(
     () => {
@@ -59,7 +114,6 @@ export default function Contact() {
       className="grain-overlay relative py-32 md:py-44 overflow-hidden"
       style={{ backgroundColor: "#141420" }}
     >
-      {/* Background image layer (project-bg-3.png) */}
       <VisualAssetSlot config={contactBackground} />
 
       <div className="max-w-7xl mx-auto px-6 md:px-12 xl:px-20" style={{ position: "relative" }}>
@@ -110,7 +164,7 @@ export default function Contact() {
             opportunities — across Europe, North America, and beyond.
           </p>
 
-          {/* Email — block display, no overflow clip, nowrap keeps it on one line */}
+          {/* Email */}
           <div className="email-wrapper mb-4">
             <a
               href={`mailto:${EMAIL}`}
@@ -128,7 +182,7 @@ export default function Contact() {
           </div>
 
           {/* Copy button */}
-          <div className="contact-reveal mb-12">
+          <div className="contact-reveal mb-8">
             <button
               onClick={handleCopy}
               aria-label={copied ? "Email address copied to clipboard" : "Copy email address"}
@@ -145,20 +199,44 @@ export default function Contact() {
             </button>
           </div>
 
+          {/* Social icon buttons — Instagram & LinkedIn */}
+          <div className="contact-reveal flex items-center gap-3 mb-12">
+            {SOCIAL_ICONS.map(({ label, href, Icon, hoverColor, hoverBorder }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                onMouseEnter={() => setHovered(label)}
+                onMouseLeave={() => setHovered(null)}
+                className="inline-flex items-center justify-center w-11 h-11 rounded-full transition-all duration-200 hover:-translate-y-0.5 hover:scale-105 focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson/50"
+                style={{
+                  color: hovered === label ? "rgba(245,240,232,0.95)" : "rgba(245,240,232,0.70)",
+                  border: `1px solid ${hovered === label ? hoverBorder : "rgba(245,240,232,0.18)"}`,
+                  backgroundColor: hovered === label ? hoverColor : "rgba(245,240,232,0.05)",
+                }}
+              >
+                <Icon size={18} />
+              </a>
+            ))}
+          </div>
+
           {/* Divider */}
           <div
             className="contact-reveal w-full h-px mb-12"
             style={{ backgroundColor: "rgba(245,240,232,0.08)" }}
           />
 
-          {/* Socials */}
+          {/* GitHub + Email pill buttons */}
           <div className="flex flex-wrap gap-3">
-            {SOCIAL.map(({ label, href, icon: Icon }) => (
+            {SOCIAL_PILLS.map(({ label, href, icon: Icon }) => (
               <a
                 key={label}
                 href={href}
                 target={href.startsWith("mailto") ? undefined : "_blank"}
                 rel="noopener noreferrer"
+                aria-label={label}
                 className="contact-reveal inline-flex items-center gap-2.5 px-5 py-3 rounded-full text-sm font-medium transition-all duration-200 group focus:outline-none focus-visible:ring-2 focus-visible:ring-crimson/50"
                 style={{
                   color: "rgba(245,240,232,0.6)",
@@ -168,13 +246,16 @@ export default function Contact() {
               >
                 <Icon size={14} />
                 {label}
-                <ArrowUpRight
-                  size={12}
-                  className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
-                />
+                {!href.startsWith("mailto") && (
+                  <ArrowUpRight
+                    size={12}
+                    className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"
+                  />
+                )}
               </a>
             ))}
           </div>
+
         </div>
       </div>
     </section>

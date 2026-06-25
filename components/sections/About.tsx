@@ -125,8 +125,8 @@ export default function About() {
               style={{ borderColor: "rgba(245,240,232,0.06)" }}
             >
               {[
-                { value: "3+",  label: "Years coding"      },
-                { value: "10+", label: "Projects built"    },
+                { value: "6+",  label: "Years coding"      },
+                { value: "30+", label: "Projects built"    },
                 { value: "4",   label: "Core disciplines"  },
               ].map(({ value, label }) => (
                 <div key={label}>
