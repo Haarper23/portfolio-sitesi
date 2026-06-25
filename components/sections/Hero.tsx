@@ -191,7 +191,7 @@ export default function Hero() {
             Explore My Work
           </a>
           <a
-            href="https://github.com/berkeedeveci"
+            href="https://github.com/Haarper23"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300"

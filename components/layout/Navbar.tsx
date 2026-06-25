@@ -67,7 +67,7 @@ export default function Navbar() {
 
           {/* Desktop CTA */}
           <a
-            href="#contact"
+            href="mailto:emrebkrdvc@gmail.com"
             className="hidden md:inline-flex items-center px-4 py-2 rounded-full text-sm font-medium transition-all duration-200"
             style={{
               color: "#f5f0e8",
@@ -118,7 +118,7 @@ export default function Navbar() {
               </a>
             ))}
             <a
-              href="#contact"
+              href="mailto:emrebkrdvc@gmail.com"
               onClick={() => setMenuOpen(false)}
               className="mt-2 inline-flex items-center justify-center px-4 py-2.5 rounded-full text-sm font-medium"
               style={{

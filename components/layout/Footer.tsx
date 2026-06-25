@@ -10,7 +10,7 @@ const links = [
 ];
 
 const social = [
-  { label: "GitHub",   href: "https://github.com/berkeedeveci",      icon: Code2 },
+  { label: "GitHub",   href: "https://github.com/Haarper23",           icon: Code2 },
   { label: "LinkedIn", href: "https://linkedin.com/in/berkeedeveci", icon: BriefcaseBusiness },
   { label: "Email",    href: "mailto:emrebkrdvc@gmail.com",          icon: Mail },
 ];

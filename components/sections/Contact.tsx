@@ -50,7 +50,7 @@ const LinkedInIcon = ({ size = 20 }: { size?: number }) => (
 );
 
 const SOCIAL_PILLS = [
-  { label: "GitHub", href: "https://github.com/berkeedeveci", icon: Code2 },
+  { label: "GitHub", href: "https://github.com/Haarper23", icon: Code2 },
   { label: "Email",  href: `mailto:${EMAIL}`,                icon: Mail },
 ] as const;
 
