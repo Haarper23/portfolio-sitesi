@@ -36,7 +36,7 @@ export default function Footer() {
               BED
             </a>
             <p className="text-parchment/25 text-xs font-mono">
-              Berke Emre Deveci · Computer Engineer · {year}
+              Berke Emre Deveci · Software Engineer · {year}
             </p>
           </div>
 

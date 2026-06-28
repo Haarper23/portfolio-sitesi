@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --font-display: var(--font-syne);
+  --font-display: var(--font-geist-sans);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
@@ -45,13 +45,13 @@
 .section-char  { background-color: #191930; color: #f0ead8; }
 .section-light { background-color: #f0ead8; color: #0f0f1c; }
 
-/* ── Glow utilities ──────────────────────────────────────────────── */
-.glow-crimson  { box-shadow: 0 0 40px 0 rgba(212, 32,  64, 0.32); }
-.glow-indigo   { box-shadow: 0 0 40px 0 rgba( 88, 84, 240, 0.32); }
-.glow-violet   { box-shadow: 0 0 40px 0 rgba(139, 68, 237, 0.28); }
-.glow-electric { box-shadow: 0 0 40px 0 rgba(108,180, 252, 0.28); }
-.glow-blue     { box-shadow: 0 0 40px 0 rgba( 59,130, 246, 0.28); }
-.glow-orange   { box-shadow: 0 0 40px 0 rgba(249,115,  22, 0.24); }
+/* ── Glow utilities — dialled back for a calmer, more premium feel ── */
+.glow-crimson  { box-shadow: 0 0 32px 0 rgba(212, 32,  64, 0.20); }
+.glow-indigo   { box-shadow: 0 0 32px 0 rgba( 88, 84, 240, 0.20); }
+.glow-violet   { box-shadow: 0 0 32px 0 rgba(139, 68, 237, 0.18); }
+.glow-electric { box-shadow: 0 0 32px 0 rgba(108,180, 252, 0.18); }
+.glow-blue     { box-shadow: 0 0 32px 0 rgba( 59,130, 246, 0.18); }
+.glow-orange   { box-shadow: 0 0 32px 0 rgba(249,115,  22, 0.16); }
 
 /* ── Film grain (pseudo-element on .grain-overlay) ───────────────── */
 .grain-overlay { position: relative; }
@@ -84,9 +84,30 @@
 /* ── Typography display class ────────────────────────────────────── */
 .text-display {
   font-family: var(--font-display);
-  font-weight: 800;
+  font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1;
+  line-height: 1.02;
+}
+
+/* ── Display headings — one confident grotesque, weight does the work ─
+   Geist is optically tight, so headings hold a hair more letter-spacing
+   than Syne did and a slightly looser line-height for a mature rhythm. */
+.font-display {
+  font-feature-settings: "ss01" 1, "cv01" 1;
+}
+
+/* ── Body copy — readable measure + comfortable rhythm ───────────── */
+.prose-body {
+  line-height: 1.7;
+  letter-spacing: -0.005em;
+}
+
+/* ── Mono labels — kept tight and quiet ──────────────────────────── */
+.label-mono {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
 }
 
 /* ── Base ────────────────────────────────────────────────────────── */

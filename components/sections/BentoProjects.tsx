@@ -123,7 +123,7 @@ export default function BentoProjects() {
         {/* Header */}
         <div className="bento-header mb-14 flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div>
-            <p className="mb-5 font-mono text-xs uppercase tracking-[0.2em] text-crimson">
+            <p className="mb-5 label-mono text-crimson">
               004 / Selected Work
             </p>
 
@@ -132,24 +132,25 @@ export default function BentoProjects() {
               style={{
                 fontSize: "clamp(2rem, 4vw, 4rem)",
                 fontWeight: 800,
-                letterSpacing: "-0.03em",
+                letterSpacing: "-0.035em",
                 lineHeight: 1.05,
               }}
             >
-              Projects that
+              Real products,
               <br />
 
-              <span style={{ color: "rgba(245,240,232,0.56)" }}>
-                ship and scale.
+              <span style={{ color: "rgba(245,240,232,0.5)" }}>
+                built end to end.
               </span>
             </h2>
           </div>
 
           <p
-            className="max-w-xs text-base leading-relaxed"
-            style={{ color: "rgba(245,240,232,0.68)" }}
+            className="max-w-xs prose-body"
+            style={{ color: "rgba(245,240,232,0.7)" }}
           >
-            A selection of work across game development, web engineering, and AI.
+            Games, backends, applications and the web — each shipped solo, with the
+            systems and trade-offs that came with it.
           </p>
         </div>
 

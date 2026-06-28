@@ -17,15 +17,33 @@ export interface VisualAssetConfig {
   slowMotion?: boolean;
 }
 
+export type ProjectStatus = "In Development" | "Completed" | "Maintained";
+
+export interface ProjectLinks {
+  demo?: string;
+  github?: string;
+  /** When "soon", renders a muted, non-interactive "Case study in progress" affordance */
+  caseStudy?: string | "soon";
+}
+
 export interface Project {
   id: string;
+  /** Product-style name, e.g. "Blood Protocol" */
   title: string;
+  /** One-line classifier under the name, e.g. "Unity Roguelite" */
+  kind: string;
   description: string;
+  /** Headline technologies shown as chips */
   tags: string[];
+  /** Notable systems / capabilities — bulleted on larger cards */
+  features?: string[];
+  role: string;
+  status: ProjectStatus;
   category: "game" | "web" | "ai" | "app" | "fullstack";
   size?: "large" | "medium" | "small";
   accentColor?: AccentColor;
   featured?: boolean;
+  links?: ProjectLinks;
   href?: string;
   image?: string;
   video?: string;

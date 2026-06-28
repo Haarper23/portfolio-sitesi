@@ -7,9 +7,7 @@ import About               from "@/components/sections/About";
 import Specializations     from "@/components/sections/Specializations";
 import FeaturedProject     from "@/components/sections/FeaturedProject";
 import BentoProjects       from "@/components/sections/BentoProjects";
-import ThreeDShowcase      from "@/components/sections/ThreeDShowcase";
 import KatanaShowcase      from "@/components/sections/KatanaShowcase";
-import HorizontalShowcase  from "@/components/sections/HorizontalShowcase";
 import Skills              from "@/components/sections/Skills";
 import Approach            from "@/components/sections/Approach";
 import OpportunityCTA      from "@/components/sections/OpportunityCTA";
@@ -27,9 +25,7 @@ export default function Home() {
         <Specializations />
         <FeaturedProject />
         <BentoProjects />
-        <ThreeDShowcase />
         <KatanaShowcase />
-        <HorizontalShowcase />
         <Skills />
         <Approach />
         <OpportunityCTA />

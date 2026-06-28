@@ -102,16 +102,20 @@ export default function Hero() {
         {/* Overline */}
         <div className="hero-badge mb-10">
           <span
-            className="inline-flex items-center gap-2.5 text-xs font-mono tracking-[0.2em] uppercase"
-            style={{ color: "rgba(240,234,216,0.5)" }}
+            className="inline-flex flex-wrap items-center gap-2.5 label-mono"
+            style={{ color: "rgba(240,234,216,0.55)" }}
           >
             <span
               className="inline-block w-1.5 h-1.5 rounded-full"
               style={{ backgroundColor: "#d42040", boxShadow: "0 0 6px rgba(212,32,64,0.9)" }}
             />
-            Computer Engineer
-            <span style={{ color: "rgba(240,234,216,0.22)" }}>{"///"}</span>
-            Game Developer · Full-Stack Developer · AI Builder
+            Software Engineer
+            <span style={{ color: "rgba(240,234,216,0.25)" }}>·</span>
+            Game Developer
+            <span style={{ color: "rgba(240,234,216,0.25)" }}>·</span>
+            Full-Stack
+            <span style={{ color: "rgba(240,234,216,0.25)" }}>·</span>
+            AI Builder
           </span>
         </div>
 
@@ -119,39 +123,34 @@ export default function Hero() {
         <h1
           className="font-display text-parchment mb-8"
           style={{
-            fontSize: "clamp(2.8rem, 7.5vw, 8.5rem)",
+            fontSize: "clamp(2.6rem, 6vw, 6.25rem)",
             fontWeight: 800,
-            letterSpacing: "-0.03em",
-            lineHeight: 0.95,
+            letterSpacing: "-0.035em",
+            lineHeight: 1.0,
           }}
         >
           <span className="block overflow-hidden">
-            <span className="hero-line block">From roguelike</span>
+            <span className="hero-line block">I build games,</span>
           </span>
           <span className="block overflow-hidden">
-            <span className="hero-line block" style={{ color: "rgba(240,234,216,0.45)" }}>
-              worlds to
-            </span>
+            <span className="hero-line block">platforms, and</span>
           </span>
           <span className="block overflow-hidden">
-            <span className="hero-line block">real-world</span>
-          </span>
-          <span className="block overflow-hidden">
-            <span className="hero-line block" style={{ color: "rgba(240,234,216,0.45)" }}>
-              software.
+            <span className="hero-line block" style={{ color: "rgba(240,234,216,0.5)" }}>
+              intelligent software.
             </span>
           </span>
         </h1>
 
         {/* Supporting copy */}
         <p
-          className="hero-copy mb-10 max-w-xl leading-relaxed"
-          style={{ color: "rgba(240,234,216,0.72)", fontSize: "1.05rem" }}
+          className="hero-copy mb-10 max-w-xl prose-body"
+          style={{ color: "rgba(240,234,216,0.78)", fontSize: "1.075rem" }}
         >
-          I&apos;m a Computer Engineer building atmospheric game systems,
-          practical applications, and intelligent software. My work spans Unity
-          and Unreal Engine development, mobile and desktop applications,
-          full-stack systems, and AI-driven tools.
+          Software engineer working across the stack — Unity and Unreal Engine
+          gameplay systems, AI desktop assistants, Java&nbsp;Spring&nbsp;Boot backends,
+          and interactive WebGL experiences. I care about how software holds up at
+          every layer, from the engine to the database.
         </p>
 
         {/* Status row */}
@@ -185,7 +184,7 @@ export default function Hero() {
             style={{
               backgroundColor: "#d42040",
               color: "#f0ead8",
-              boxShadow: "0 0 28px rgba(212,32,64,0.4)",
+              boxShadow: "0 0 22px rgba(212,32,64,0.28)",
             }}
           >
             Explore My Work
@@ -214,16 +213,6 @@ export default function Hero() {
             }}
           >
             Download Resume
-          </a>
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-sm font-semibold transition-all duration-300"
-            style={{
-              color: "rgba(240,234,216,0.55)",
-              border: "1px solid rgba(240,234,216,0.1)",
-            }}
-          >
-            Contact Me
           </a>
         </div>
       </div>

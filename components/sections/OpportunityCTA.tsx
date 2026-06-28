@@ -72,22 +72,22 @@ export default function OpportunityCTA() {
 
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-12 xl:px-20">
 
-        <p className="cta-reveal font-mono text-xs tracking-[0.2em] uppercase text-crimson mb-8">
+        <p className="cta-reveal label-mono text-crimson mb-8">
           International Opportunity
         </p>
 
         <h2
           className="cta-reveal font-display text-parchment mb-8 max-w-3xl"
           style={{
-            fontSize: "clamp(2.4rem, 6vw, 7rem)",
+            fontSize: "clamp(2.4rem, 5vw, 5.5rem)",
             fontWeight: 800,
-            letterSpacing: "-0.035em",
-            lineHeight: 0.95,
+            letterSpacing: "-0.04em",
+            lineHeight: 1.0,
           }}
         >
-          Let&apos;s build something
+          Looking for a team
           <br />
-          <span style={{ color: "rgba(245,240,232,0.3)" }}>worth remembering.</span>
+          <span style={{ color: "rgba(245,240,232,0.4)" }}>worth betting on.</span>
         </h2>
 
         <p

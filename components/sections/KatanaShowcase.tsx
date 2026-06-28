@@ -27,10 +27,10 @@ const KatanaInteractiveScene = dynamic(
 );
 
 const TRAITS: [string, string][] = [
-  ["Precision engineering over brute force",              "#d42040"],
-  ["Gameplay systems designed for responsiveness",        "#8b44ed"],
-  ["Controlled, purposeful motion in every interaction",  "#6cb4fc"],
-  ["Technical craftsmanship at every layer of the stack", "#5854f0"],
+  ["Unity & HLSL shader programming",                 "#d42040"],
+  ["React Three Fiber & Three.js — this live scene",  "#8b44ed"],
+  ["Real-time rendering & performance budgeting",     "#6cb4fc"],
+  ["Procedural geometry & particle systems",          "#5854f0"],
 ];
 
 export default function KatanaShowcase() {
@@ -70,29 +70,30 @@ export default function KatanaShowcase() {
 
           {/* ── Text ─────────────────────────────────────────────── */}
           <div className="lg:pr-16">
-            <p className="ks-text font-mono text-xs tracking-[0.2em] uppercase text-crimson mb-5">
-              006 / Katana Showcase
+            <p className="ks-text label-mono text-crimson mb-5">
+              005 / Real-Time Graphics
             </p>
             <h2
               className="ks-text font-display text-parchment mb-6"
               style={{
-                fontSize: "clamp(2rem, 4.5vw, 4.5rem)",
+                fontSize: "clamp(2rem, 4vw, 4rem)",
                 fontWeight: 800,
-                letterSpacing: "-0.03em",
-                lineHeight: 1.0,
+                letterSpacing: "-0.035em",
+                lineHeight: 1.02,
               }}
             >
-              Engineered
+              Graphics, down
               <br />
-              <span style={{ color: "rgba(245,240,232,0.32)" }}>like a blade.</span>
+              <span style={{ color: "rgba(245,240,232,0.42)" }}>to the shader.</span>
             </h2>
             <p
-              className="ks-text leading-relaxed max-w-md mb-8"
-              style={{ color: "rgba(245,240,232,0.52)", fontSize: "1.02rem" }}
+              className="ks-text prose-body max-w-md mb-8"
+              style={{ color: "rgba(245,240,232,0.62)", fontSize: "1.02rem" }}
             >
-              A visual study connecting precision engineering, game-development
-              systems, controlled motion, and cinematic interaction — discipline
-              expressed as form.
+              Real-time graphics run through everything I build — from HLSL shaders in
+              Unity to interactive WebGL in the browser. The blade beside you is rendered
+              live with React Three Fiber: procedural geometry, custom materials, and
+              motion driven entirely in code. Drag it to explore.
             </p>
 
             <ul className="space-y-4 mb-10">

@@ -121,8 +121,8 @@ export default function Contact() {
 
           {/* Label */}
           <div className="contact-reveal flex items-center gap-4 mb-8">
-            <p className="font-mono text-xs tracking-[0.2em] uppercase text-crimson">
-              010 / Contact
+            <p className="label-mono text-crimson">
+              008 / Contact
             </p>
             <span
               className="inline-flex items-center gap-1.5 text-xs font-mono px-3 py-1 rounded-full border"

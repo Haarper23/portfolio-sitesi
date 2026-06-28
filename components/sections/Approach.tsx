@@ -119,7 +119,7 @@ style={{ backgroundColor: "#0c0c12" }}
         className="approach-reveal mb-5 select-none font-mono text-xs uppercase tracking-[0.2em]"
         style={{ color: "#c41e3a" }}
       >
-        009 / Development Approach
+        007 / Development Approach
       </p>
 
       <h2

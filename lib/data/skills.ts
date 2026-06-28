@@ -1,10 +1,14 @@
 import type { SkillGroup } from "@/types";
 
+/* Curated, not exhaustive — only the technologies that best represent the
+   actual projects on this site. Redundant or implied entries (SQL under
+   PostgreSQL, auth under JWT/RBAC, GitHub under Git, etc.) are left out on
+   purpose: this reads like a deliberate engineer's stack, not a checklist. */
 export const skillGroups: SkillGroup[] = [
   {
-    domain: "Programming Languages",
+    domain: "Languages",
     accentColor: "crimson",
-    skills: ["C#", "C++", "Java", "Python", "TypeScript", "JavaScript", "SQL", "Assembly"],
+    skills: ["C#", "C++", "Java", "Python"],
   },
   {
     domain: "Game Development",
@@ -12,81 +16,34 @@ export const skillGroups: SkillGroup[] = [
     skills: [
       "Unity",
       "Unreal Engine",
-      "Gameplay Systems",
       "Gameplay Programming",
-      "Roguelike Systems",
-      "Procedural Generation",
       "Enemy AI",
-      "Pathfinding",
-      "Combat Systems",
-      "Shader Logic",
-      "WebGL",
-      "Game Design",
+      "Procedural Generation",
     ],
   },
   {
-    domain: "Full-Stack & Web",
+    domain: "Backend",
     accentColor: "indigo",
-    skills: [
-      "React",
-      "Angular",
-      "Next.js",
-      "TypeScript",
-      "Node.js",
-      "Spring Boot",
-      "REST APIs",
-      "TailwindCSS",
-      "Authentication",
-      "Frontend Architecture",
-      "Backend Architecture",
-      "Responsive Web Design",
-      "HTML",
-      "CSS",
-    ],
+    skills: ["Spring Boot", "REST APIs", "JWT / RBAC", "PostgreSQL"],
   },
   {
-    domain: "Database & DevOps",
+    domain: "Frontend",
+    accentColor: "electric",
+    skills: ["React", "Angular", "Three.js / React Three Fiber", "WebGL"],
+  },
+  {
+    domain: "AI",
     accentColor: "blue",
     skills: [
-      "PostgreSQL",
-      "SQL",
-      "Docker",
-      "Maven",
-      "Git",
-      "GitHub",
-      "DataGrip",
-      "Postman",
-    ],
-  },
-  {
-    domain: "Application Development",
-    accentColor: "orange",
-    skills: [
-      "Android Studio",
-      "Java",
-      "C#",
-      ".NET",
-      "SQLite",
-      "API Integration",
-      "Desktop UI",
-      "Mobile UI",
-      "Local Data Management",
-      "Cross-Platform Applications",
-    ],
-  },
-  {
-    domain: "AI & Intelligent Systems",
-    accentColor: "electric",
-    skills: [
-      "Python",
-      "Machine Learning",
-      "Recommendation Systems",
-      "Context Awareness",
-      "Voice Recognition",
-      "OpenAI API",
+      "LLM Integration",
+      "Voice Interfaces",
       "Intelligent Agents",
-      "Real-Time Processing",
-      "Natural Language Interaction",
+      "Workflow Automation",
     ],
+  },
+  {
+    domain: "Developer Tools",
+    accentColor: "orange",
+    skills: ["Git", "Docker", "Maven", "Postman", "IntelliJ IDEA", "VS Code"],
   },
 ];
